@@ -1,22 +1,22 @@
 {
-    "name": ":vendor_name/:package_name",
-    "description": ":package_description",
+    "name": "intvent/mijndomeinreseller",
+    "description": "A PHP composer package for MijnDomeinReseller",
     "keywords": [
-        ":vendor_name",
-        ":package_name"
+        "intvent",
+        "mijndomeinreseller"
     ],
-    "homepage": "https://github.com/spatie/:package_name",
+    "homepage": "https://github.com/IntVent/mijndomeinreseller",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": ":author_email",
-            "homepage": "https://spatie.be",
-            "role": "Developer"
+            "name": "IntVent BV",
+            "email": "info@intvent.nl",
+            "homepage": "https://intvent.nl"
         }
     ],
     "require": {
-        "php": "^7.4"
+        "php": "^7.4|^8.0",
+        "guzzlehttp/guzzle": "^7.2"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
@@ -25,12 +25,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Spatie\\Skeleton\\": "src"
+            "IntVent\\MijnDomeinReseller\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Spatie\\Skeleton\\Tests\\": "tests"
+            "IntVent\\MijnDomeinReseller\\Tests\\": "tests"
         }
     },
     "scripts": {

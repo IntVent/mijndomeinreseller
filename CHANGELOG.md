@@ -1,7 +1,7 @@
 # Changelog
 
-All notable changes to `:package_name` will be documented in this file
+All notable changes to `mijndomeinreseller` will be documented in this file
 
-## 1.0.0 - 202X-XX-XX
+## 0.1.0 - 2020-12-25
 
 - initial release
