@@ -1,7 +1,7 @@
 # A PHP composer package for MijnDomeinReseller
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/IntVent/mijndomeinreseller.svg?style=flat-square)](https://packagist.org/packages/IntVent/mijndomeinreseller)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/IntVent/mijndomeinreseller/run-tests?label=tests)](https://github.com/IntVent/mijndomeinreseller/actions?query=workflow%3Arun-tests+branch%3Amaster)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/IntVent/mijndomeinreseller/Tests?label=tests)](https://github.com/IntVent/mijndomeinreseller/actions?query=workflow%3ATests+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/IntVent/mijndomeinreseller.svg?style=flat-square)](https://packagist.org/packages/IntVent/mijndomeinreseller)
 
 ## Installation
