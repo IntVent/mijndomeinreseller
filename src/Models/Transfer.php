@@ -2,12 +2,20 @@
 
 namespace IntVent\MijnDomeinReseller\Models;
 
+/**
+ * @property string $transfer_id
+ * @property string $domein
+ * @property string $status
+ * @property string $tld
+ * @property string $status_melding
+ * @property string $datum_invoer
+ * @property string $datum_update
+ * @property string $status_melding_count
+ * @property string $status_datum
+ */
 class Transfer extends Model
 {
-    /**
-     * @var array
-     */
-    protected $fillable = [
+    protected array $fillable = [
         'transfer_id',
         'domein',
         'status',
@@ -20,7 +28,7 @@ class Transfer extends Model
     ];
 
     /**
-     * @return bool
+     * @return array|bool
      */
     public function get(array $attributes = [])
     {
@@ -35,14 +43,11 @@ class Transfer extends Model
         if ($result['transfercount'] > 0) {
             return $result['items'];
         }
+
+        return false;
     }
 
-    /**
-     * @param $tld
-     *
-     * @return mixed
-     */
-    public function find($id)
+    public function find(string $id): array
     {
         $result = $this->client->get('transfer_details', [
             'transfer_id' => $id,

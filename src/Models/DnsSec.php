@@ -2,24 +2,18 @@
 
 namespace IntVent\MijnDomeinReseller\Models;
 
+/**
+ * @property array<int, DnsSecRecord> $dnssec_records
+ */
 class DnsSec extends Model
 {
-    /**
-     * @var array
-     */
-    protected $fillable = [
+    protected array $fillable = [
         'domein',
         'tld',
         'dnssec_records',
     ];
 
-    /**
-     * @param $domain
-     * @param $tld
-     *
-     * @return mixed
-     */
-    public function find($domain, $tld)
+    public function find(string $domain, string $tld): self
     {
         $result = $this->client->get('dnssec_get_details', [
             'domein' => $domain,
@@ -31,12 +25,7 @@ class DnsSec extends Model
         return $this->createObjectFromResponse($result);
     }
 
-    /**
-     * @param $result
-     *
-     * @return mixed
-     */
-    protected function processDnsSecRecords($result)
+    protected function processDnsSecRecords(array $result): array
     {
         if (isset($result['items']) && count($result['items'])) {
             $result['dnssec_records'] = [];

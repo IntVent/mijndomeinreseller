@@ -2,12 +2,25 @@
 
 namespace IntVent\MijnDomeinReseller\Models;
 
+/**
+ * @property string $tld
+ * @property string $prijs_registratie
+ * @property string $prijs_registratie_munt
+ * @property string $prijs_verhuizing
+ * @property string $prijs_verhuizing_munt
+ * @property string $prijs_verlenging
+ * @property string $prijs_verlenging_munt
+ * @property string $munt_wisselkoers
+ * @property string $lengte_min
+ * @property string $lengte_max
+ * @property string $jaar_min
+ * @property string $jaar_max
+ * @property string $registreren
+ * @property string $verhuizen
+ */
 class Tld extends Model
 {
-    /**
-     * @var array
-     */
-    protected $fillable = [
+    protected array $fillable = [
         'tld',
         'prijs_registratie',
         'prijs_registratie_munt',
@@ -25,7 +38,7 @@ class Tld extends Model
     ];
 
     /**
-     * @return bool
+     * @return array|bool
      */
     public function get()
     {
@@ -36,12 +49,7 @@ class Tld extends Model
         return false;
     }
 
-    /**
-     * @param $tld
-     *
-     * @return mixed
-     */
-    public function find($tld)
+    public function find(string $tld): self
     {
         $result = $this->client->get('tld_get_details', [
             'tld' => $tld,

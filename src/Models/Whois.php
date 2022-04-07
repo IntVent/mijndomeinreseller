@@ -6,12 +6,8 @@ class Whois extends Model
 {
     /**
      * Advanced domain whois.
-     *
-     * @param $domain
-     *
-     * @return string
      */
-    public function advanced($domain)
+    public function advanced(string $domain): string
     {
         $result = $this->client->get('whois', [
             'type' => 'uitgebreid',
@@ -24,11 +20,9 @@ class Whois extends Model
     /**
      * Check for available domains.
      *
-     * @param array $domains
-     *
-     * @return array
+     * @param array<int,string> $domains
      */
-    public function bulk(array $domains)
+    public function bulk(array $domains): array
     {
         return $this->client->get('whois', [
             'type' => 'bulk',
@@ -38,12 +32,8 @@ class Whois extends Model
 
     /**
      * Retrieve information from internal registered domain.
-     *
-     * @param $domain
-     *
-     * @return array
      */
-    public function internal($domain)
+    public function internal(string $domain): array
     {
         return $this->client->get('whois', [
             'type' => 'intern',
@@ -51,12 +41,7 @@ class Whois extends Model
         ]);
     }
 
-    /**
-     * @param $result
-     *
-     * @return string
-     */
-    private function formatAdvancedWhoisResult($result)
+    private function formatAdvancedWhoisResult(string $result): string
     {
         return urldecode($result);
     }

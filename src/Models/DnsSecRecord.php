@@ -2,12 +2,15 @@
 
 namespace IntVent\MijnDomeinReseller\Models;
 
+/**
+ * @property string $flag
+ * @property string $algorithm
+ * @property string $publickey
+ * @property string $record_id
+ */
 class DnsSecRecord extends Model
 {
-    /**
-     * @var array
-     */
-    protected $fillable = [
+    protected array $fillable = [
         'domein',
         'tld',
         'flag',
@@ -16,13 +19,7 @@ class DnsSecRecord extends Model
         'record_id',
     ];
 
-    /**
-     * @param $domain
-     * @param $tld
-     *
-     * @return array
-     */
-    public function find($domain, $tld)
+    public function find(string $domain, string $tld): array
     {
         return $this->client->get('dnssec_get_details', [
             'domein' => $domain,
@@ -30,36 +27,21 @@ class DnsSecRecord extends Model
         ]);
     }
 
-    /**
-     * @param array $attributes
-     *
-     * @return array
-     */
-    public function create(array $attributes = [])
+    public function create(array $attributes = []): array
     {
         $this->fill($attributes);
 
         return $this->client->put('dnssec_record_add', $this->attributes);
     }
 
-    /**
-     * @param array $attributes
-     *
-     * @return array
-     */
-    public function update(array $attributes = [])
+    public function update(array $attributes = []): array
     {
         $this->fill($attributes);
 
         return $this->client->put('dnssec_record_modify', $this->attributes);
     }
 
-    /**
-     * @param array $attributes
-     *
-     * @return array
-     */
-    public function remove(array $attributes = [])
+    public function remove(array $attributes = []): array
     {
         $this->fill($attributes);
 

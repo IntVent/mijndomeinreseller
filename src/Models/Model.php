@@ -6,20 +6,9 @@ use IntVent\MijnDomeinReseller\Client;
 
 abstract class Model
 {
-    /**
-     * @var array
-     */
-    protected $attributes = [];
-
-    /**
-     * @var array
-     */
-    protected $fillable = [];
-
-    /**
-     * @var Client
-     */
-    protected $client;
+    protected array $attributes = [];
+    protected array $fillable = [];
+    protected Client $client;
 
     /**
      * Model constructor.
@@ -33,63 +22,48 @@ abstract class Model
         $this->fill($attributes);
     }
 
-    /**
-     * @return Client
-     */
-    public function getClient()
+    public function getClient(): Client
     {
         return $this->client;
     }
 
-    /**
-     * @return array
-     */
-    public function getAttributes()
+    public function getAttributes(): array
     {
         return $this->attributes;
     }
 
-    /**
-     * @param $result
-     *
-     * @return mixed
-     */
-    public function createObjectFromResponse($result)
+    public function createObjectFromResponse(array $result): static
     {
         $modelName = get_class($this);
 
-        $model = new $modelName($this->client, $result);
-
-        return $model;
+        return new $modelName($this->client, $result);
     }
 
     /**
-     * @param $key
-     *
      * @return mixed
      */
-    public function __get($key)
+    public function __get(string $key)
     {
-        if (isset($this->attributes[$key])) {
-            return $this->attributes[$key];
-        }
+        return $this->attributes[$key] ?? null;
+    }
+
+    public function __isset(string $key): bool
+    {
+        return isset($this->attributes[$key]);
     }
 
     /**
-     * @param $key
-     * @param $value
+     * @param string $key
+     * @param mixed $value
      */
-    public function __set($key, $value)
+    public function __set(string $key, $value): void
     {
         if ($this->isFillable($key)) {
             $this->attributes[$key] = $value;
         }
     }
 
-    /**
-     * @param array $attributes
-     */
-    protected function fill(array $attributes = [])
+    protected function fill(array $attributes = []): void
     {
         foreach ($attributes as $key => $value) {
             if ($this->isFillable($key)) {
@@ -98,12 +72,8 @@ abstract class Model
         }
     }
 
-    /**
-     * @param $key
-     * @return bool
-     */
-    protected function isFillable($key)
+    protected function isFillable(string $key): bool
     {
-        return in_array($key, $this->fillable);
+        return in_array($key, $this->fillable, true);
     }
 }
