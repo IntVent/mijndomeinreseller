@@ -2,12 +2,23 @@
 
 namespace IntVent\MijnDomeinReseller\Models;
 
+/**
+ * @property string $template
+ * @property string $template_id
+ * @property string $template_name
+ * @property string $dupliceer
+ * @property string $record_id
+ * @property string $type
+ * @property string $host
+ * @property string $address
+ * @property string $priority
+ * @property string $weight
+ * @property string $port
+ * @property string $ttl
+ */
 class Templates extends Model
 {
-    /**
-     * @var array
-     */
-    protected $fillable = [
+    protected array $fillable = [
         'template',
         'template_id',
         'template_name',
@@ -23,7 +34,7 @@ class Templates extends Model
     ];
 
     /**
-     * @return bool
+     * @return array|bool
      */
     public function get()
     {
@@ -35,95 +46,58 @@ class Templates extends Model
     }
 
     /**
-     * @param $id
-     *
-     * @return mixed
+     * @param string $id
      */
-    public function find($id)
+    public function find(string $id): array
     {
         return $this->client->get('dns_template_get_details', [
             'template_id' => $id,
         ]);
     }
 
-    /**
-     * @param array $attributes
-     *
-     * @return array
-     */
-    public function add(array $attributes = [])
+    public function add(array $attributes = []): array
     {
         $this->fill($attributes);
 
         return $this->client->put('dns_template_add', $this->attributes);
     }
 
-    /**
-     * @param array $attributes
-     *
-     * @return array
-     */
-    public function modify(array $attributes = [])
+    public function modify(array $attributes = []): array
     {
         $this->fill($attributes);
 
         return $this->client->put('dns_template_modify_name', $this->attributes);
     }
 
-    /**
-     * @param array $attributes
-     *
-     * @return array
-     */
-    public function del(array $attributes = [])
+    public function del(array $attributes = []): array
     {
         $this->fill($attributes);
 
         return $this->client->put('dns_template_del', $this->attributes);
     }
 
-    /**
-     * @param array $attributes
-     *
-     * @return array
-     */
-    public function create(array $attributes = [])
+    public function create(array $attributes = []): array
     {
         $this->fill($attributes);
 
         return $this->client->put('dns_template_record_add', $this->attributes);
     }
 
-    /**
-     * @param array $attributes
-     *
-     * @return array
-     */
-    public function update(array $attributes = [])
+    public function update(array $attributes = []): array
     {
         $this->fill($attributes);
 
         return $this->client->put('dns_template_record_modify', $this->attributes);
     }
 
-    /**
-     * @param array $attributes
-     *
-     * @return array
-     */
-    public function remove(array $attributes = [])
+    public function remove(array $attributes = []): array
     {
         $this->fill($attributes);
 
         return $this->client->put('dns_template_record_del', $this->attributes);
     }
 
-    /**
-     * @param array $attributes
-     *
-     * @return array
-     */
-    public function ttl(array $attributes = [])
+    public function ttl(array $attributes = []): array
     {
         $this->fill($attributes);
 

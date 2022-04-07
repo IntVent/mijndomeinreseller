@@ -2,9 +2,27 @@
 
 namespace IntVent\MijnDomeinReseller\Models;
 
+/**
+ * @property string $ns_id
+ * @property string $auto
+ * @property string $ns1
+ * @property string $ns1_ip
+ * @property string $ns2
+ * @property string $ns2_ip
+ * @property string $ns3
+ * @property string $ns3_ip
+ * @property string $ns4
+ * @property string $ns4_ip
+ * @property string $ns5
+ * @property string $ns5_ip
+ * @property string $ns6
+ * @property string $ns6_ip
+ * @property string $ns7
+ * @property string $ns7_ip
+ */
 class Nameserver extends Model
 {
-    protected $fillable = [
+    protected array $fillable = [
         'ns_id',
         'auto',
         'ns1',
@@ -24,7 +42,7 @@ class Nameserver extends Model
     ];
 
     /**
-     * @return mixed
+     * @return array|bool
      */
     public function get()
     {
@@ -35,12 +53,7 @@ class Nameserver extends Model
         return false;
     }
 
-    /**
-     * @param array $attributes
-     *
-     * @return array
-     */
-    public function create(array $attributes)
+    public function create(array $attributes): array
     {
         $this->fill($attributes);
 

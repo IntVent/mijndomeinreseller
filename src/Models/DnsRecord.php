@@ -2,12 +2,18 @@
 
 namespace IntVent\MijnDomeinReseller\Models;
 
+/**
+ * @property string $record_id
+ * @property string $type
+ * @property string $host
+ * @property string $address
+ * @property string $priority
+ * @property string $weight
+ * @property string $port
+ */
 class DnsRecord extends Model
 {
-    /**
-     * @var array
-     */
-    protected $fillable = [
+    protected array $fillable = [
         'domein',
         'tld',
         'ttl',
@@ -20,13 +26,7 @@ class DnsRecord extends Model
         'port',
     ];
 
-    /**
-     * @param $domain
-     * @param $tld
-     *
-     * @return array
-     */
-    public function find($domain, $tld)
+    public function find(string $domain, string $tld): array
     {
         return $this->client->get('dns_get_details', [
             'domein' => $domain,
@@ -34,48 +34,28 @@ class DnsRecord extends Model
         ]);
     }
 
-    /**
-     * @param array $attributes
-     *
-     * @return array
-     */
-    public function create(array $attributes)
+    public function create(array $attributes): array
     {
         $this->fill($attributes);
 
         return $this->client->put('dns_record_add', $this->attributes);
     }
 
-    /**
-     * @param array $attributes
-     *
-     * @return array
-     */
-    public function update(array $attributes = [])
+    public function update(array $attributes = []): array
     {
         $this->fill($attributes);
 
         return $this->client->put('dns_record_modify', $this->attributes);
     }
 
-    /**
-     * @param array $attributes
-     *
-     * @return array
-     */
-    public function ttl(array $attributes = [])
+    public function ttl(array $attributes = []): array
     {
         $this->fill($attributes);
 
         return $this->client->put('dns_ttl_modify', $this->attributes);
     }
 
-    /**
-     * @param array $attributes
-     *
-     * @return array
-     */
-    public function remove(array $attributes = [])
+    public function remove(array $attributes = []): array
     {
         $this->fill($attributes);
 

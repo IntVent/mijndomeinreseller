@@ -2,24 +2,20 @@
 
 namespace IntVent\MijnDomeinReseller\Models;
 
+/**
+ * @property array<int, DnsRecord> $dns_records
+ * @property string $ttl
+ */
 class Dns extends Model
 {
-    /**
-     * @var array
-     */
-    protected $fillable = [
+    protected array $fillable = [
         'domein',
         'tld',
+        'ttl',
         'dns_records',
     ];
 
-    /**
-     * @param $domain
-     * @param $tld
-     *
-     * @return mixed
-     */
-    public function find($domain, $tld)
+    public function find(string $domain, string $tld): Dns
     {
         $result = $this->client->get('dns_get_details', [
             'domein' => $domain,
@@ -31,30 +27,16 @@ class Dns extends Model
         return $this->createObjectFromResponse($result);
     }
 
-    /**
-     * @param $domain
-     * @param $tld
-     * @param $ttl
-     *
-     * @return array
-     */
-    public function updateTtl($domain, $tld, $ttl)
+    public function updateTtl(string $domain, string $tld, string $ttl): array
     {
-        $result = $this->client->get('dns_ttl_modify', [
+        return $this->client->get('dns_ttl_modify', [
             'domein' => $domain,
             'tld' => $tld,
             'ttl' => $ttl,
         ]);
-
-        return $result;
     }
 
-    /**
-     * @param $result
-     *
-     * @return mixed
-     */
-    protected function processDnsRecords($result)
+    protected function processDnsRecords(array $result): array
     {
         if (isset($result['items']) && count($result['items'])) {
             $result['dns_records'] = [];
